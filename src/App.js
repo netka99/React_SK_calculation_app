@@ -1,7 +1,13 @@
+//Global Style
+import GlobalStyle from "./GlobalStyle";
+//import pages
+import Sklep from "./pages/Sklep";
+
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <GlobalStyle />
+      <Sklep />
     </div>
   );
 }
