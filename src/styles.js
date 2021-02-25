@@ -68,3 +68,10 @@ export const AccordionStyle = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const FormItemStyle = styled.div`
+  img {
+    width: 40px;
+    border-radius: 45%;
+  }
+`;

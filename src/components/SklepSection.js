@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { AccordionExample } from "../accordion/Accordion";
-import FormInputCard from "../components/FormInput";
+import FormContainer from "../components/FormInput";
 
 import "../accordion/stylesAccordion.css";
 
@@ -53,7 +53,7 @@ const SklepSection = () => {
           </div>
         </div>
       </AccordionStyle>
-      <FormInputCard />
+      <FormContainer />
 
       <FooterPicture>
         <div>
