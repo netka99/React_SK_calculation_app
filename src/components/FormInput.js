@@ -50,7 +50,12 @@ const FormItem = (props) => {
               open: { opacity: 1, height: "auto" },
               collapsed: { opacity: 0, height: 0 },
             }}
-            transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
+            transition={{
+              duration: 0.8,
+              staggerChildren: 0.15,
+              ease: "easeOut",
+              // ease: [0.04, 0.62, 0.23, 0.98],
+            }}
           >
             <form id={props.item.shopName} onSubmit={handleSubmit}>
               <div>
@@ -128,106 +133,3 @@ const FormContainer = () => {
 };
 
 export default FormContainer;
-
-/*const FormInputCard = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const [data, setData] = useState({
-    sklep: "",
-    kartacze: "",
-    babka: "",
-    kiszka: "",
-  });
-
-  /*const [shop, setShop] = useState([
-    { id: 1, nameShop: "Stankiewicz1" },
-    { id: 2, nameShop: "Stankiewicz2" },
-  ]);
-
-  // const { shop1, shop2 } = shop;
-  const { sklep, kartacze, babka, kiszka } = data;
-
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(
-        "https://v1.nocodeapi.com/ann1111/google_sheets/RxXCxOtJTlQEfoCK?tabId=Arkusz1",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify([
-            [sklep, kartacze, babka, kiszka, new Date().toLocaleString()],
-          ]),
-        }
-      );
-      await response.json();
-      setData({ ...data, sklep: "", kartacze: "", babka: "", kiszka: "" });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <FontAwesomeIcon icon={faStoreAlt} size="lg" />
-          <label
-            key={shop.id}
-            id="shop"
-            type="text"
-            name="shop"
-            value={shop.nameShop}
-            onChange={(e) =>
-              setShop.map((items) => items.id === parseInt(e.target.key))
-            }
-          >
-            shop
-          </label>
-        </div>
-        <div>
-          <h3>Ilość</h3>
-          <h3>Koszt</h3>
-        </div>
-        <div>
-          <label htmlFor="kartacze">Kartacze</label>
-          <input
-            type="number"
-            name="kartacze"
-            value={kartacze}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="babka">Babka</label>
-          <input
-            type="number"
-            name="babka"
-            value={babka}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="kiszka">Kiszka</label>
-          <input
-            type="number"
-            name="kiszka"
-            value={kiszka}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <input type="submit" value="Submit" />
-        </div>
-      </form>
-    </div>
-  );
-};
-
-export default FormInputCard;*/
