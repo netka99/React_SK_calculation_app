@@ -7,8 +7,8 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
 }
 body{
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+   // overflow-x: hidden;
 }
 `;
 

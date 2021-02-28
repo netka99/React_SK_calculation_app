@@ -62,16 +62,44 @@ export const DatePickerStyle = styled.div`
   justify-content: center;
 `;
 
-export const AccordionStyle = styled.div`
+export const FormStyle = styled.div`
   display: flex;
   margin: auto;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 15px 0px 15px 0px;
+  max-width: 500px;
+  //border: 2px solid #cecaca;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 18px #888888;
 `;
 
 export const FormItemStyle = styled.div`
   img {
     width: 40px;
     border-radius: 45%;
+  }
+`;
+
+export const FormLabel = styled.div`
+  display: flex;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  min-width: 400px;
+  font-weight: bold;
+  color: #656464;
+
+  label {
+    min-width: 400px;
+    cursor: pointer;
+  }
+  p {
+    padding-left: 20px;
+    display: inline;
   }
 `;

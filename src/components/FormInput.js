@@ -6,16 +6,16 @@ import kartaczeSmall from "../img/kartaczeSmall.jpg";
 import babkaZiemn from "../img/babke-ziemniaczanaSmall.jpg";
 import kiszkaZiemn from "../img/kiszka-ziemniaczanaSmall.jpg";
 
-import { FormItemStyle } from "../styles";
+import { FormItemStyle, FormStyle, FormLabel } from "../styles";
 
 function handleSubmit(e) {
   e.preventDefault();
   try {
-    const row = [e.target.id, new Date().toLocaleString()];
+    const row = [new Date().toLocaleString(), e.target.id];
     new FormData(e.target).forEach((value) => row.push(value));
     console.log(JSON.stringify(row));
     fetch(
-      "https://v1.nocodeapi.com/ann1111/google_sheets/RxXCxOtJTlQEfoCK?tabId=Arkusz1",
+      `https://v1.nocodeapi.com/ann1111/google_sheets/${process.env.REACT_APP_GOOGLESHEET_API}?tabId=Arkusz1`,
       {
         method: "POST",
         headers: {
@@ -33,12 +33,18 @@ const FormItem = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div>
-      <label htmlFor="shopName" class="open" onClick={() => setIsOpen(!isOpen)}>
-        {!isOpen ? false : true}
-        <FontAwesomeIcon icon={faStoreAlt} size="lg" />
-        {props.item.shopName}
-      </label>
+    <FormStyle>
+      <FormLabel>
+        <label
+          htmlFor="shopName"
+          class="open"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {!isOpen ? false : true}
+          <FontAwesomeIcon icon={faStoreAlt} size="lg" />
+          <p> {props.item.shopName}</p>
+        </label>
+      </FormLabel>
       <AnimatePresence>
         {isOpen && (
           <motion.section
@@ -114,13 +120,20 @@ const FormItem = (props) => {
           </motion.section>
         )}
       </AnimatePresence>
-    </div>
+    </FormStyle>
   );
 };
 
 const FormContainer = () => {
   const state = {
-    items: [{ shopName: "Stankiewicza1" }, { shopName: "Stankiewicza2" }],
+    items: [
+      { shopName: "Sklep STAN 1" },
+      { shopName: "Sklep STAN 2" },
+      { shopName: "Sklep Lewiatan Świerkowa" },
+      { shopName: "Sklep Lewiatan Putry" },
+      { shopName: "Sklep Lewiatan Szpitalna" },
+      { shopName: "Sklep Lewiatan Woj.Polskiego" },
+    ],
   };
 
   return (

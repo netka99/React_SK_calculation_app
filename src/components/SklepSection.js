@@ -20,7 +20,6 @@ import {
   Title1,
   TextHeader,
   ArrowImg,
-  AccordionStyle,
 } from "../styles";
 //Framer Motion
 import { motion } from "framer-motion";
@@ -46,13 +45,7 @@ const SklepSection = () => {
       <DatePickerStyle>
         <App />
       </DatePickerStyle>
-      <AccordionStyle>
-        <div className="bodyAccordion">
-          <div className="example-container">
-            <AccordionExample />
-          </div>
-        </div>
-      </AccordionStyle>
+
       <FormContainer />
 
       <FooterPicture>
