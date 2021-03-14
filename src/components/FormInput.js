@@ -1,37 +1,53 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStoreAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStoreAlt,
+  faChevronDown,
+  faChevronUp,
+} from "@fortawesome/free-solid-svg-icons";
 import kartaczeSmall from "../img/kartaczeSmall.jpg";
 import babkaZiemn from "../img/babke-ziemniaczanaSmall.jpg";
 import kiszkaZiemn from "../img/kiszka-ziemniaczanaSmall.jpg";
+import App from "../components/DatePicker";
 
-import { FormItemStyle, FormStyle, FormLabel } from "../styles";
-
-function handleSubmit(e) {
-  e.preventDefault();
-  try {
-    const row = [new Date().toLocaleString(), e.target.id];
-    new FormData(e.target).forEach((value) => row.push(value));
-    console.log(JSON.stringify(row));
-    fetch(
-      `https://v1.nocodeapi.com/ann1111/google_sheets/${process.env.REACT_APP_GOOGLESHEET_API}?tabId=Arkusz1`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify([row]),
-      }
-    ).then((resp) => console.log(resp));
-  } catch (err) {
-    console.log(err);
-  }
-}
+import {
+  FormItemStyle,
+  FormStyle,
+  FormLabel,
+  SubmitStyle,
+  FormTopHeading,
+  ArrowBackground,
+} from "../styles";
 
 const FormItem = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    const date = props.getInputDate();
+    try {
+      const row = [
+        `${date.day}/${date.month}/${date.year}`,
+        new Date().toLocaleString(),
+        e.target.id,
+      ];
+      new FormData(e.target).forEach((value) => row.push(value));
+      console.log(JSON.stringify(row));
+      fetch(
+        `https://v1.nocodeapi.com/ann1111/google_sheets/${process.env.REACT_APP_GOOGLESHEET_API}?tabId=Arkusz1`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify([row]),
+        }
+      ).then((resp) => console.log(resp));
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <FormStyle>
       <FormLabel>
@@ -43,6 +59,17 @@ const FormItem = (props) => {
           {!isOpen ? false : true}
           <FontAwesomeIcon icon={faStoreAlt} size="lg" />
           <p> {props.item.shopName}</p>
+          <ArrowBackground>
+            {!isOpen ? (
+              <span>
+                <FontAwesomeIcon icon={faChevronDown} size="lg" />
+              </span>
+            ) : (
+              <span>
+                <FontAwesomeIcon icon={faChevronUp} size="lg" />
+              </span>
+            )}
+          </ArrowBackground>
         </label>
       </FormLabel>
       <AnimatePresence>
@@ -64,23 +91,25 @@ const FormItem = (props) => {
             }}
           >
             <form id={props.item.shopName} onSubmit={handleSubmit}>
-              <div>
+              <FormTopHeading>
                 <p>Ilość</p>
                 <p>Koszt</p>
-              </div>
+              </FormTopHeading>
               <motion.div
                 variants={{
                   collapsed: { scale: 0.9, opacity: 0 },
                   open: { scale: 1, opacity: 1 },
                 }}
                 transition={{ duration: 0.6 }}
-                className="content-placeholder"
+                // className="content-placeholder"
               >
                 <FormItemStyle>
                   <img src={kartaczeSmall} alt="kartacze danie" />
                   <label>Kartacze</label>
-                  <input type="tekst" name="kartacze" />
+                  <input type="tekst" name="kartacze" placeholder="0" />
                   <p>szt.</p>
+                  <span>60</span>
+                  <p>zł</p>
                 </FormItemStyle>
               </motion.div>
               <motion.div
@@ -88,14 +117,16 @@ const FormItem = (props) => {
                   collapsed: { scale: 0.9, opacity: 0 },
                   open: { scale: 1, opacity: 1 },
                 }}
-                transition={{ duration: 0.6 }}
-                className="content-placeholder"
+                transition={{ duration: 0.5 }}
+                // className="content-placeholder"
               >
                 <FormItemStyle>
                   <img src={babkaZiemn} alt="babka ziemniaczana danie" />
                   <label>Babka</label>
-                  <input type="text" name="babka" />
+                  <input type="text" name="babka" placeholder="0.00" />
                   <p>kg</p>
+                  <span>60</span>
+                  <p>zł</p>
                 </FormItemStyle>
               </motion.div>
               <motion.div
@@ -103,19 +134,32 @@ const FormItem = (props) => {
                   collapsed: { scale: 0.9, opacity: 0 },
                   open: { scale: 1, opacity: 1 },
                 }}
-                transition={{ duration: 0.6 }}
-                className="content-placeholder"
+                transition={{ duration: 0.4 }}
+                //  className="content-placeholder"
               >
                 <FormItemStyle>
                   <img src={kiszkaZiemn} alt="kiszka ziemniaczana danie" />
                   <label>Kiszka</label>
-                  <input type="text" name="kiszka" />
+                  <input type="text" name="kiszka" placeholder="0.00" />
                   <p>kg</p>
+                  <span>60</span>
+                  <p>zł</p>
                 </FormItemStyle>
               </motion.div>
-              <button type="submit" value="Submit">
-                Zapisz
-              </button>
+              <motion.div
+                variants={{
+                  collapsed: { scale: 0.9, opacity: 0 },
+                  open: { scale: 1, opacity: 1 },
+                }}
+                transition={{ duration: 0.4 }}
+                //  className="content-placeholder"
+              >
+                <SubmitStyle>
+                  <button type="submit" value="Submit">
+                    Zapisz
+                  </button>
+                </SubmitStyle>
+              </motion.div>
             </form>
           </motion.section>
         )}
@@ -124,7 +168,7 @@ const FormItem = (props) => {
   );
 };
 
-const FormContainer = () => {
+const FormContainer = (props) => {
   const state = {
     items: [
       { shopName: "Sklep STAN 1" },
@@ -139,7 +183,7 @@ const FormContainer = () => {
   return (
     <div>
       {state.items.map((item, index) => (
-        <FormItem key={index} item={item} />
+        <FormItem key={index} item={item} getInputDate={props.getInputDate} />
       ))}
     </div>
   );

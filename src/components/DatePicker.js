@@ -2,8 +2,16 @@ import React, { useState } from "react";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import DatePicker from "react-modern-calendar-datepicker";
 
-const App = () => {
-  const [selectedDay, setSelectedDay] = useState(null);
+const App = (props) => {
+  console.log(`${props}`);
+  const [selectedDay, setSelectedDay] = useState(
+    props.containerState.initialDate
+  );
+
+  function setAllSelectedDay(value) {
+    props.containerState.initialDate = value;
+    setSelectedDay(value);
+  }
 
   // render regular HTML input element
   const renderCustomInput = ({ ref }) => (
@@ -26,6 +34,7 @@ const App = () => {
         boxShadow: "0 1.5rem 2rem rgba(156, 136, 255, 0.2)",
         color: "#542cb1",
         outline: "none",
+        cursor: "pointer",
       }}
       className="my-custom-input-class" // a styling class
     />
@@ -34,7 +43,7 @@ const App = () => {
   return (
     <DatePicker
       value={selectedDay}
-      onChange={setSelectedDay}
+      onChange={setAllSelectedDay}
       renderInput={renderCustomInput} // render a custom input
       shouldHighlightWeekends
       colorPrimary="#542cb1"

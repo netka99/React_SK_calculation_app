@@ -1,9 +1,8 @@
 import React from "react";
 import Top from "../img/Top.png";
 import Footer from "../img/Footer.JPG";
-import App from "../components/DatePicker";
+import App, { Contact } from "../components/DatePicker";
 import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import FormContainer from "../components/FormInput";
@@ -18,16 +17,8 @@ import {
   TextHeader,
   ArrowImg,
 } from "../styles";
-//Framer Motion
-import { motion } from "framer-motion";
 
 const SklepSection = () => {
-  const containerState = { initialDate: null };
-
-  function getInputDate() {
-    return containerState.initialDate;
-  }
-
   return (
     <Sklep>
       <TopPicture>
@@ -36,20 +27,19 @@ const SklepSection = () => {
         </div>
       </TopPicture>
       <Title1>
-        <Link to="/">
-          <ArrowImg>
-            <FontAwesomeIcon icon={faArrowLeft} size="lg" />
-          </ArrowImg>
-        </Link>
+        <ArrowImg>
+          {" "}
+          <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+        </ArrowImg>
         <TextHeader>
           <h2 className="textHeader">Sklepy</h2>
         </TextHeader>
       </Title1>
       <DatePickerStyle>
-        <App containerState={containerState} />
+        <App />
       </DatePickerStyle>
-
-      <FormContainer getInputDate={getInputDate} />
+      <Contact />
+      <FormContainer />
 
       <FooterPicture>
         <div>
