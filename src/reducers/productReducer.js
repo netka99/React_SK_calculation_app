@@ -6,7 +6,7 @@ const initState = {
 const productReducer = (state = initState, action) => {
   switch (action.type) {
     case "FETCH_DATA":
-      return { ...state };
+      return { ...state, data: action.payload.data };
     default:
       return { ...state };
   }

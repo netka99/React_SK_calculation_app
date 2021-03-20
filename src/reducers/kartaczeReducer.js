@@ -12,4 +12,10 @@ const kartaczeReducer = (state = initState, action) => {
   }
 };
 
+//ACTION CREATOR
+const fetchKartacze = (userData) => {
+  return {
+    type: "FETCH_KARTACZE",
+  };
+};
 export default kartaczeReducer;
