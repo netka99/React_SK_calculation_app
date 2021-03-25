@@ -3,7 +3,6 @@ import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import DatePicker from "react-modern-calendar-datepicker";
 
 const App = (props) => {
-  console.log(`${props}`);
   const [selectedDay, setSelectedDay] = useState(
     props.containerState.initialDate
   );

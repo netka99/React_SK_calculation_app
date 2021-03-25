@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { loadProductData } from "./actions/productAction";
+import React from "react";
 //Global Style
 import GlobalStyle from "./GlobalStyle";
 //import pages
@@ -14,10 +12,6 @@ import StatisticsPage from "./pages/Statistics";
 import { Switch, Route } from "react-router-dom";
 
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(loadProductData());
-  });
   return (
     <div className="App">
       <GlobalStyle />
